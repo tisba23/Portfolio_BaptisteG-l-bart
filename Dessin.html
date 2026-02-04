@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Artistique - Baptiste Gélébart</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles spécifiques pour la galerie */
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .art-item {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .art-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .art-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .audio-section {
+            margin-top: 60px;
+        }
+
+        .audio-card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        audio {
+            height: 35px;
+            filter: invert(100%) hue-rotate(90deg) brightness(1.5); /* Pour que le player soit vert/gris */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="hero">
+            <h1>Espace <span class="accent">Créatif</span></h1>
+            <p>Dessins, croquis et compositions musicales personnelles.</p>
+            <a href="index.html" class="btn" style="display: inline-block; margin-top: 20px;">← Retour au Portfolio</a>
+        </header>
+
+        <section id="dessins">
+            <h3 class="section-title">Dessins & Illustrations</h3>
+            <div class="art-grid">
+                <div class="art-item">
+                    <img src="Avion dessin.jpg" alt="Croquis Avion" onclick="window.open(this.src)">
+                    <div style="padding: 10px; font-size: 0.9rem; color: #aaa;">Croquis aéronautique</div>
+                </div>
+                
+                <div class="art-item">
+                    <img src="https://via.placeholder.com/400x400" alt="Exemple">
+                    <div style="padding: 10px; font-size: 0.9rem; color: #aaa;">Légende du dessin</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="musique" class="audio-section">
+            <h3 class="section-title">Compositions & Musique</h3>
+            
+            <div class="audio-card">
+                <div>
+                    <h4 style="margin:0;">Nom du Morceau</h4>
+                    <p style="margin:5px 0 0; font-size: 0.8rem; color: #888;">Style : Orchestral / Jeu Vidéo</p>
+                </div>
+                <audio controls>
+                    <source src="musique1.mp3" type="audio/mpeg">
+                    Ton navigateur ne supporte pas l'audio.
+                </audio>
+            </div>
+
+            <div class="audio-card">
+                <div>
+                    <h4 style="margin:0;">Remaster (650+)</h4>
+                    <p style="margin:5px 0 0; font-size: 0.8rem; color: #888;">Travail de mixage et arrangement.</p>
+                </div>
+                <audio controls>
+                    <source src="musique2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Baptiste Gélébart</p>
+    </footer>
+
+</body>
+</html>
