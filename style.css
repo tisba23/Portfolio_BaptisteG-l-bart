@@ -76,15 +76,9 @@ body::after { bottom: -200px; right: -200px; }
 }
 
 .card {
-    display: flex;
-    background: var(--card-bg);
-    /* PLUS DE BLUR ICI */
-    border: 1px solid #333;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.4s ease; /* Transition fluide pour l'agrandissement */
-    cursor: pointer; /* Indique qu'on peut cliquer */
-    opacity: 0.7; /* Légèrement transparent par défaut pour faire ressortir l'actif */
+    cursor: pointer; /* Change la souris en main pour montrer qu'on peut cliquer */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animation fluide */
+    /* Assure-toi que ces lignes existent déjà dans ton .card, sinon ajoute-les */
 }
 
 /* ETAT AU SURVOL (Optionnel, léger effet) */
@@ -95,11 +89,11 @@ body::after { bottom: -200px; right: -200px; }
 
 /* ETAT ACTIF (Quand on clique) */
 .card.active {
-    transform: scale(1.05); /* Agrandissement de 5% */
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    opacity: 1; /* Pleine opacité */
-    z-index: 10; /* Passe au dessus des autres */
+    transform: scale(1.05); /* Grossit de 5% */
+    background-color: #222; /* Devient légèrement plus clair/opaque pour la lecture */
+    border-color: var(--accent-color); /* Bordure verte brillante */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Grosse ombre pour l'effet 3D */
+    z-index: 10; /* Passe au-dessus des autres cartes */
 }
 
 .card-image {
@@ -111,6 +105,10 @@ body::after { bottom: -200px; right: -200px; }
 
 .card-content { padding: 30px; flex: 1; }
 .card-content h4 { font-size: 1.6rem; margin-bottom: 15px; color: #fff; }
+
+.project-grid:hover .card:not(:hover):not(.active) {
+    opacity: 0.6; /* Les cartes non survolées s'assombrissent un peu */
+}
 
 .tag {
     background: rgba(76, 175, 80, 0.1);
@@ -142,3 +140,4 @@ body::after { bottom: -200px; right: -200px; }
     .skills-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.5rem; }
 }
+
