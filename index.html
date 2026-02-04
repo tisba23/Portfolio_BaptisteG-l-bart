@@ -194,7 +194,27 @@
         </div>
     </footer>
 
-</body>
+<script>
+    // On sélectionne toutes les cartes
+    const cards = document.querySelectorAll('.card');
 
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            // 1. On enlève la classe 'active' de TOUTES les cartes
+            cards.forEach(c => c.classList.remove('active'));
+            
+            // 2. On ajoute la classe 'active' UNIQUEMENT à celle cliquée
+            card.classList.add('active');
+        });
+    });
+
+    // Optionnel : Active la première carte par défaut au chargement
+    if(cards.length > 0) {
+        cards[0].classList.add('active');
+    }
+</script>
+    
+</body>
 </html>
+
 
