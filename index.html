@@ -194,27 +194,45 @@
         </div>
     </footer>
 
-<script>
+    <script>
     // On sélectionne toutes les cartes
-    const cards = document.querySelectorAll('.card');
+        const cards = document.querySelectorAll('.card');
 
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
             // 1. On enlève la classe 'active' de TOUTES les cartes
-            cards.forEach(c => c.classList.remove('active'));
+                cards.forEach(c => c.classList.remove('active'));
             
             // 2. On ajoute la classe 'active' UNIQUEMENT à celle cliquée
-            card.classList.add('active');
+                card.classList.add('active');
+            });
         });
-    });
 
     // Optionnel : Active la première carte par défaut au chargement
-    if(cards.length > 0) {
-        cards[0].classList.add('active');
-    }
-</script>
-    
+        if(cards.length > 0) {
+            cards[0].classList.add('active');
+        }
+    </script>
+    <script>
+        // On récupère toutes les cartes
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                // 1. Si la carte est déjà active, on la désactive (on la ferme)
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                } 
+                // 2. Sinon, on ferme les autres et on ouvre celle-ci
+                else {
+                    cards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
 
 
