@@ -7,10 +7,11 @@
 
 :root {
     --bg-color: #0b0f0b;
-    --card-bg: #1e1e1e; /* Fond opaque car plus de flou */
+    --card-bg: #1e1e1e; /* Fond opaque sans blur */
     --text-color: #e0e0e0;
     --accent-color: #4CAF50;
     --font-main: 'Inter', sans-serif;
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 body {
@@ -22,21 +23,21 @@ body {
     position: relative;
 }
 
-/* FOND VERT CORRIGÉ : Plus grand flou pour un vrai fade */
+/* --- LE FADE VERT (Vrai dégradé lisse) --- */
 body::before, body::after {
     content: "";
     position: fixed;
-    width: 600px; /* Plus large */
-    height: 600px;
+    width: 800px;
+    height: 800px;
     border-radius: 50%;
-    /* Dégradé plus subtil */
-    background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
-    filter: blur(120px); /* Flou augmenté pour "lisser" les cercles */
+    /* radial-gradient plus étendu pour éviter les cercles visibles */
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.07) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(150px);
     z-index: -1;
     pointer-events: none;
 }
-body::before { top: -200px; left: -200px; }
-body::after { bottom: -200px; right: -200px; }
+body::before { top: -300px; left: -300px; }
+body::after { bottom: -300px; right: -300px; }
 
 .container {
     max-width: 1000px;
@@ -44,100 +45,152 @@ body::after { bottom: -200px; right: -200px; }
     padding: 0 20px;
 }
 
-/* HERO */
-.hero { padding: 100px 0; text-align: center; }
-.hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+a { 
+    text-decoration: none; 
+    transition: 0.3s; 
+}
+
+/* HERO SECTION */
+.hero {
+    padding: 80px 0;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 10px; }
 .hero .accent { color: var(--accent-color); }
-.hero h2 { font-size: 1.2rem; color: #888; margin-bottom: 25px; }
+.hero h2 { font-size: 1.5rem; font-weight: normal; color: #aaa; margin-bottom: 20px; }
+.hero .bio { max-width: 600px; margin: 0 auto 30px auto; color: #ccc; }
 
-/* BOUTONS */
 .social-links { display: flex; justify-content: center; gap: 15px; }
+
 .btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid #333;
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-.btn:hover {
-    background: var(--accent-color);
-    color: #000;
-    border-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    background: transparent;
 }
 
-/* PROJETS & INTERACTION */
+.btn:hover { 
+    background-color: var(--accent-color); 
+    color: #000; 
+}
+
+/* SECTION PROJETS */
+section { padding: 60px 0; }
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 15px;
+}
+
 .project-grid {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
+/* --- LES CARTES (Sans blur, cliquables pour le POP) --- */
 .card {
-    cursor: pointer; /* Change la souris en main pour montrer qu'on peut cliquer */
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animation fluide */
-    /* Assure-toi que ces lignes existent déjà dans ton .card, sinon ajoute-les */
+    display: flex;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0.85;
 }
 
-/* ETAT AU SURVOL (Optionnel, léger effet) */
-.card:hover {
-    border-color: #555;
-    opacity: 0.9;
-}
-
-/* ETAT ACTIF (Quand on clique) */
+/* EFFET POP QUAND ACTIF (Via JavaScript) */
 .card.active {
-    transform: scale(1.05); /* Grossit de 5% */
-    background-color: #222; /* Devient légèrement plus clair/opaque pour la lecture */
-    border-color: var(--accent-color); /* Bordure verte brillante */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Grosse ombre pour l'effet 3D */
-    z-index: 10; /* Passe au-dessus des autres cartes */
+    transform: scale(1.04);
+    border-color: var(--accent-color);
+    background: #252525;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    z-index: 10;
+}
+
+.card:hover:not(.active) {
+    border-color: #555;
+    opacity: 1;
 }
 
 .card-image {
-    flex: 0 0 350px;
-    height: auto;
-    border-right: 1px solid #333;
+    flex: 0 0 400px;
+    background: #000;
 }
-.card-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .card-content { padding: 30px; flex: 1; }
 .card-content h4 { font-size: 1.6rem; margin-bottom: 15px; color: #fff; }
-
-.project-grid:hover .card:not(:hover):not(.active) {
-    opacity: 0.6; /* Les cartes non survolées s'assombrissent un peu */
-}
+.card-content p { font-size: 0.95rem; color: #bbb; margin-bottom: 15px; }
 
 .tag {
-    background: rgba(76, 175, 80, 0.1);
+    background: #333;
     color: var(--accent-color);
-    font-size: 0.75rem;
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(76, 175, 80, 0.2);
-    margin-right: 8px;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-right: 5px;
     font-weight: bold;
 }
 
-/* SKILLS */
-.bg-darker { background: rgba(0, 0, 0, 0.3); margin-top: 50px; }
-.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.skill-col {
-    background: #1e1e1e;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #333;
+.card-links { margin-top: 20px; }
+.card-links a {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 0.95rem;
 }
-.skill-col h4 { color: var(--accent-color); margin-bottom: 20px; text-transform: uppercase; }
-.skill-col ul li { margin-bottom: 12px; list-style: none; border-left: 2px solid #333; padding-left: 15px; }
+
+.card-links a:hover { text-decoration: underline; }
+
+/* SKILLS SECTION */
+.bg-darker { background-color: #070907; }
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.skill-col h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+}
+
+.skill-col ul li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    border-left: 2px solid #333;
+    list-style: none;
+}
+
+footer { 
+    text-align: center; 
+    padding: 40px 0; 
+    color: #666; 
+    font-size: 0.9rem; 
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .card { flex-direction: column; }
-    .card-image { flex: 0 0 200px; border-right: none; border-bottom: 1px solid #333; }
+    .card-image { flex: 0 0 auto; height: 200px; }
     .skills-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.5rem; }
 }
-
