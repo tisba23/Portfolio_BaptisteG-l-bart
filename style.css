@@ -108,7 +108,7 @@ section { padding: 60px 0; }
 
 /* EFFET POP QUAND ACTIF (Via JavaScript) */
 .card.active {
-    transform: scale(1.5);
+    transform: scale(1.24);
     border-color: var(--accent-color);
     background: #252525;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
@@ -194,4 +194,5 @@ footer {
     .skills-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 2.5rem; }
 }
+
 
