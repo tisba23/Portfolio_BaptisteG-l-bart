@@ -186,15 +186,35 @@
 
         </div>
     </section>
-
+    
     <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 Baptiste Gélébart. Codé à la main en HTML/CSS.</p>
         </div>
     </footer>
+
+    <script>
+        // On récupère toutes les cartes
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', function() {
+                // 1. Si la carte est déjà active, on la désactive (on la ferme)
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                } 
+                // 2. Sinon, on ferme les autres et on ouvre celle-ci
+                else {
+                    cards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
+
 
 
 
